@@ -15,7 +15,7 @@ import threading
 global cap, Analysis
 global var1, frame_1
 global win, label1, v, q, Next
-global canvas,link1,link2,link3,link4,bg_image
+global canvas,link1,link2,link3,link4
 adit = 0
 SajCount = 0
 link1="https://github.com/Muhammad-Anees99/Automated-Salah-Pose-Tracker-using-Mediapipe-and-User-Friendly-Interface.git "
@@ -29,7 +29,6 @@ Update = False
 CheckAgain = True
 engine = pyttsx3.init() 
 engine2=pyttsx3.init() 
-bg_image = PhotoImage(file="bg11.png")
 Prayer = {'Takbir': False, 'Qayam': False, 'Ruku':False, 'Qomah': False, 'Sajdah': False, 'Atahyaat': False}
 cap = cv2.VideoCapture(0)
 detector = PoseDetector()
@@ -553,6 +552,7 @@ win.title('Salat Analsis using Mediapipe')
 frame_1 = Frame(win, width=0, height=0, bg= "#FFFF00").place(x=0, y=0)
 label1 = Label(frame_1, width = 600, height= 400)
 label1.place(x=700, y=160)
+bg_image = PhotoImage(file="bg11.png")
 canvas = Canvas(win, width=wid, height=heit)
 canvas.pack()
 canvas.create_image(0, 0, image=bg_image, anchor=NW)

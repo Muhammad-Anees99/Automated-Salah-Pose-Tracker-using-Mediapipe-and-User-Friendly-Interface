@@ -15,7 +15,7 @@ import threading
 global cap, Analysis
 global var1, frame_1
 global win, label1, v, q, Next
-global canvas,link1,link2,link3,lin4,bg_image
+global canvas,link1,link2,link3,link4,bg_image
 adit = 0
 SajCount = 0
 link1="https://github.com/Muhammad-Anees99/Automated-Salah-Pose-Tracker-using-Mediapipe-and-User-Friendly-Interface.git "

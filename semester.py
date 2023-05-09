@@ -18,10 +18,10 @@ global win, label1, v, q, Next
 global canvas,link1,link2,link3,lin4
 adit = 0
 SajCount = 0
-link1="https://github.com/Muhammad-Anees99"
-link2="https://github.com/Muhammad-Anees99"
-link3="https://github.com/Muhammad-Anees99"
-link4="https://github.com/Muhammad-Anees99"
+link1="https://github.com/Muhammad-Anees99/Automated-Salah-Pose-Tracker-using-Mediapipe-and-User-Friendly-Interface.git "
+link2="https://medium.com/@m.anees990011"
+link3="https://github.com/Muhammad-Anees99/Automated-Salah-Pose-Tracker-using-Mediapipe-and-User-Friendly-Interface.git "
+link4="https://medium.com/@muawwizaliyousuf74"
 check = False
 Draw = False
 Analysis = False
@@ -36,9 +36,6 @@ detector = PoseDetector()
 
 mpPose=mp.solutions.pose # From different
 mpDraw=mp.solutions.drawing_utils
-# github Anees
-def o_link(linky):
-    webbrowser.open(linky)
 
 
 voices = engine2.getProperty('voices')
@@ -46,7 +43,12 @@ engine2.setProperty('voice', voices[1].id)
 engine2.setProperty('language', 'ur')
 engine2.setProperty('voice', 'urdu')
 engine2.setProperty('rate', 150)
-
+engine.say("Loading Started, Please Hold on for few seconds!")
+engine.runAndWait()
+#opens links
+def o_link(linky):
+    webbrowser.open(linky)
+#Current pose speak
 def read_out():
     true_vars = [key for key, value in Prayer.items() if value]
     if len(true_vars) == 1:
@@ -55,26 +57,10 @@ def read_out():
 
 # Define a function to update the variables in the dictionary and call read_out if necessary
 def update_variables():
-    # Your logic for setting the variables to true or false goes here
-    # In this example, true every 3 seconds
     while True:
         time.sleep(3)
-#         var_name = 'Qayam'
-#         for key in Prayer.keys():
-#             Prayer[key] = False
-#         Prayer[var_name] = True
-#         print("current position")
         read_out()
 
-# Start a separate thread to update the variables in the dictionary
-
-
-def speak_label(label_widget=None):
-    if label_widget is not None:
-        text = label_widget.cget("text")
-        engine.say(text)
-        engine.runAndWait()
-        label_widget.spoken = True
 ### FUNCTION TO CALCULATE ANGLES###
 def Angle(First, Second, Third):
     Pa_X = lmlist[First][1]
@@ -101,15 +87,6 @@ def Angle(First, Second, Third):
         
     return angle
 
-# voice
-
-    
-def convert_to_voice():
-    # Get the input text from the user
-    text = "Your Next Position is"
-    # Convert the input text to voice
-    engine.say(text)
-    engine.runAndWait()
 ### FUNCTION FOR START LIVE BUTTON ###
 def Starting():
     global Analysis, Update, wid, heit, label1
@@ -121,12 +98,9 @@ def Starting():
     canvas = Canvas(win, width=win.winfo_screenwidth(), height=win.winfo_screenheight())
     canvas.pack()
     # print(lmlist)
-    # add the background image to the canvas
     canvas.create_image(0, 0, image=bg_image, anchor=NW)
-    
     label1.configure(width = wid, height = heit)
     label1.place(x=420, y=180)
-
     Analysis = True
     Update = True
 
@@ -135,7 +109,7 @@ def RecordedVideo():
 
     global win, label1, cap, wid, heit, Analysis, Update, check
     cap.release()
-    win.after(1000, lambda: engine2.say("Starting Recoded Video Analysis"))
+    win.after(1000, lambda: engine2.say("Please Select Any one RecordedVideo"))
     win.after(1000, engine2.runAndWait)
     win.filename = filedialog.askopenfilename(initialdir = "Users\manee\OneDrive\Desktop",  \
     title = "SelectRecordedVideos")
@@ -148,7 +122,6 @@ def RecordedVideo():
         Update = True
         wid = 236
         heit = 400
-        print(",,,",win.filename)
     else:
         cap = cv2.VideoCapture(0)
         Analysis = False
@@ -158,9 +131,6 @@ def RecordedVideo():
         label1.place(x=860, y=300)
         wid = 140
         heit = 80
-        print(win.filename)
-        
-
     LiveVideo()
     select_img()
 
@@ -178,7 +148,7 @@ def MMenu():
     MainMenu.destroy()
     DetectMssg.destroy()
     NextMssg.destroy()
-    NextVoice.destroy()
+    # NextVoice.destroy()
     welc1.destroy()
     # welc2.destroy()
     # welc4.destroy()
@@ -186,7 +156,7 @@ def MMenu():
     canvas.pack()
     # print(lmlist)
     # add the background image to the canvas
-    win.after(1000, lambda: engine2.say("Exiting from Live Analysis"))
+    win.after(1000, lambda: engine2.say("Exiting to MainMenu"))
     win.after(1000, engine2.runAndWait)
     canvas.create_image(0, 0, image=bg_image, anchor=NW)
     Draw = False
@@ -219,7 +189,7 @@ def MMenu2():
     Mua_Med.destroy()
     welc1.destroy()
     welc2.destroy()
-    win.after(1000, lambda: engine2.say("Exiting from About Us"))
+    win.after(1000, lambda: engine2.say("Exiting To Mainmenu"))
     win.after(1000, engine2.runAndWait)
     canvas = Canvas(win, width=win.winfo_screenwidth(), height=win.winfo_screenheight())
     canvas.pack()
@@ -237,6 +207,7 @@ def MMenu2():
     cap = cv2.VideoCapture(0)
     LiveVideo()
     welcome()
+    
 ### fUNCTION FOR DRAW SCALE BUTTON ###
 def callback1(value):
     global Draw
@@ -244,7 +215,6 @@ def callback1(value):
         Draw = False
     else:
         Draw = True
-
 
 ### FUNCTION FOR STARTING VIDEO PROCESING ###
 def LiveVideo():
@@ -461,8 +431,8 @@ def select_img():
     label1.image = finalImage
     win.after(1, select_img)
     
+    
 def show_buttons():
-    # Create a frame to hold the inner buttons
     global welc2,welc4,welc4,welc5,welc6,An_Git,An_Med,Mua_Git,Mua_Med,MainMenu2
     inner_frame = Frame(win)
     inner_frame.place(x=500,y=550)
@@ -471,33 +441,24 @@ def show_buttons():
     StartRecord.destroy()
     outer_button.destroy()
     Exit.destroy()
-    
-    
-    
-    An_Git = Button(win,text="GitHub",font=("Times",12), command= lambda:o_link(link1),width = 14, fg = "white",bg = "#2C2F33", padx=10,pady=10,\
+    An_Git = Button(win,text="GitHub",borderwidth=12,font=("Times",12), command= lambda:o_link(link1),width = 14, fg = "white",bg = "#2C2F33", padx=10,pady=10,\
     relief = RAISED)
-    An_Git.place(x = 335, y = 470)
-    An_Med= Button(win,text="Medium",font=("Times",12), command=lambda:o_link(link2),width = 14, fg = "white",bg = "#2C2F33", padx=10,pady=10,\
+    An_Git.place(x = 335, y = 475)
+    An_Med= Button(win,text="Medium",borderwidth=12,font=("Times",12), command=lambda:o_link(link2),width = 14, fg = "white",bg = "#2C2F33", padx=10,pady=10,\
     relief = RAISED)
-    An_Med.place(x = 335, y = 530)
-    Mua_Git = Button(win,text="GitHub",font=("Times",12), command=lambda:o_link(link3),width = 14, fg = "white",bg = "#2C2F33", padx=10,pady=10,\
+    An_Med.place(x = 335, y = 550)
+    Mua_Git = Button(win,text="GitHub",borderwidth=12,font=("Times",12), command=lambda:o_link(link3),width = 14, fg = "white",bg = "#2C2F33", padx=10,pady=10,\
     relief = RAISED)
-    Mua_Git.place(x = 880, y = 470)
-    Mua_Med = Button(win,text="Medium",font=("Times",12), command=lambda:o_link(link4),width = 14, fg = "white",bg = "#2C2F33", padx=10,pady=10,\
+    Mua_Git.place(x = 865, y = 475)
+    Mua_Med = Button(win,text="Medium",borderwidth=12,font=("Times",12), command=lambda:o_link(link4),width = 14, fg = "white",bg = "#2C2F33", padx=10,pady=10,\
     relief = RAISED)
-    Mua_Med.place(x = 880, y = 530)
-    # welc4 = Message(win, justify = CENTER, text= "Developed By :                      Muhammad Anees (2021-MC-03)\
-    #                                 Muawwiz Ali Yousaf (2021-MC-13)", \
-    # font = ("Times", 16), fg = "white",bg = "#2C2F33", relief = FLAT, width = 1280)
-    # welc4.place(x = 170, y = 450)
-    
+    Mua_Med.place(x = 865, y = 550)
     welc4 = Message(win, justify = CENTER, text= "Developed By :", \
     font = ("Times", 16), fg = "white",bg = "#2C2F33", relief = FLAT, width = 1280)
     welc4.place(x = 600, y = 380)
     # engine2.say("This Project is Developed by Muhammad Anees (2021-MC-03) and Muawwiz Ali Yousaf (2021-MC-13) in Department of Mechatronics & Control Engineering, University of Engineering and Technology, Lahore")
-    win.after(1000, lambda: engine2.say("This Project is Developed by Muhammad Anees (2021-MC-03) and Muawwiz Ali Yousaf (2021-MC-13) in Department of Mechatronics & Control Engineering, University of Engineering and Technology, Lahore. If You need Acces to code press Github Button and if you need more information Click on Medium Button"))
-    win.after(1000, engine2.runAndWait)
-    # engine2.runAndWait()
+    win.after(1500, lambda: engine2.say("For More information Click GitHub Button"))
+    win.after(1500, engine2.runAndWait)
     welc5= Message(win, justify = CENTER, text= "Muhammad Anees (2021-MC-03)", \
     font = ("Times", 16), fg = "white",bg = "#2C2F33", relief = FLAT, width = 1280)
     welc5.place(x = 250, y = 430)
@@ -507,11 +468,12 @@ def show_buttons():
     welc2 = Message(win, justify = CENTER, font = ("Times", 18), fg = "white", \
     bg = "#2C2F33",text= "Department of Mechatronics & Control Engineering, University of Engineering and Technology, Lahore",\
     width = 1200,relief = FLAT)
-    welc2.place(x = 175, y = 640)
-    
-    MainMenu2 = Button(win,text='Exit to Main Menu',font = ("Times", 12), width = 14, fg = "white",bg = "#2C2F33", padx=10,pady=10,\
+    welc2.place(x = 175, y = 660)
+    MainMenu2 = Button(win,text='Exit to Main Menu',borderwidth=12,font = ("Times", 12), width = 14, fg = "white",bg = "#2C2F33", padx=10,pady=10,\
     command= MMenu2, relief = RAISED)
-    MainMenu2.place(x = 600, y = 580)
+    MainMenu2.place(x = 595, y = 575)
+    
+    
 def welcome():
     global StartLive, welc1, welc2, welc3, welc4, label1, wid, heit, WelcMsg, Exit, win, StartRecord,outer_button
     WelcMsg = StringVar()
@@ -519,36 +481,31 @@ def welcome():
     welc1 = Message(win, justify = CENTER, textvariable = WelcMsg, font = ("Times", 20), \
     fg = "white",bg = "#2C2F33", relief = FLAT, width = 1000)
     welc1.place(x = 270, y = 120)
-    WelcMsg.spoken = False
-
-
-    # Schedule the first call to speak_label after 1 seconds
-    welc1.after(3000, speak_label, welc1)
-
-
+    # WelcMsg.spoken = False
+    # welc1.after(3000, speak_label, welc1)
     welc3 = Message(win, justify = CENTER, text= "Press START to begin your analysis", \
     font = ("Times", 14), fg = "white",bg = "#2C2F33", relief = FLAT,\
     width = 1000)
     welc3.place(x = 550, y = 420)
-
     outer_button = Button(win, text="About us",borderwidth=12,font = ("Times", 12),width = 14, fg = "white",bg = "#2C2F33", padx=10,pady=10, \
-        command=show_buttons,relief = RAISED)
+    command=show_buttons,relief = RAISED)
     outer_button.place(x=490,y=600)
-    
     StartLive=Button(win,text='Start Live Video',borderwidth=12,font = ("Times", 12), width = 14, fg = "white",bg = "#2C2F33", padx=10,pady=10,\
     command= Starting, relief = RAISED)
     StartLive.place(x = 490, y = 475)
-
-    StartRecord =Button(win,text='Start Recorded Video',borderwidth=12,font = ("Times", 12), width = 14, fg = "white",bg = "#2C2F33",\
-    padx=10,pady=10, relief = RAISED, command = RecordedVideo)
+    StartRecord =Button(win,text='Start Recorded Video',borderwidth=12,font = ("Times", 12), width = 14, fg = "white",bg = "#2C2F33",padx=10,pady=10, relief = RAISED, \
+    command = RecordedVideo)
     StartRecord.place(x = 735, y = 475)
-
     Exit = Button(win,text='Exit Program',borderwidth=12,font = ("Times", 12), width = 14, fg = "white",bg = "#2C2F33", padx=10,pady=10,\
-    command= win.destroy, relief = RAISED)
+    command= ExitTheProgram, relief = RAISED)
     Exit.place(x = 735, y = 600)
     
     
-
+def ExitTheProgram():
+    engine.say("Exiting the program!")
+    engine.runAndWait()
+    win.destroy()
+    
 def AnalysisWinUpdate():
     global v, q, pos, wid, heit, label1, StartLive, welc1, welc2, welc3, welc4
     global DetectionLabel, MainMenu, DrawScl, WelcMsg, DetectMssg, NextMssg, Next,NextVoice
@@ -588,16 +545,12 @@ def AnalysisWinUpdate():
     NextMssg = Message(win, justify = CENTER, font = ("Times", 18), bg = "#2C2F33", fg = "white", \
     textvariable= Next, width = 200,relief = FLAT)
     NextMssg.place(x = 200, y = 170)
-    
-    
-    NextVoice =Button(win, width = 14, fg = "white", bg = "black",\
-    padx=10,pady=10, relief = RAISED,text="Convert to voice", command=convert_to_voice,font = ("Times", 15))
-    NextVoice.place(x=790, y=620)
-    
     threading.Thread(target=update_variables).start()
 
+#Main Program
 win = Tk()
-
+win.after(1000, lambda: engine2.say("WELCOME TO THE PRAYER ANALYSIS MEDIAPIPE PROJECT"))
+win.after(1000, engine2.runAndWait)
 wid = win.winfo_screenwidth()
 heit = win.winfo_screenheight()
 win.geometry("%dx%d" % (wid, heit))
@@ -605,25 +558,12 @@ win.title('Salat Analsis using Mediapipe')
 frame_1 = Frame(win, width=0, height=0, bg= "#FFFF00").place(x=0, y=0)
 label1 = Label(frame_1, width = 600, height= 400)
 label1.place(x=700, y=160)
-
 bg_image = PhotoImage(file="bg11.png")
-# get the width and height of the image
-# width = bg_image.width()
-# height = bg_image.height()
-# create a canvas with the same width and height as the image
 canvas = Canvas(win, width=wid, height=heit)
 canvas.pack()
-# add the background image to the canvas
 canvas.create_image(0, 0, image=bg_image, anchor=NW)
-
-# logo = PhotoImage(file="logo2.png")
-# # resize the image using the subsample method
-# resized_image = logo.subsample(2, 2) 
-# logo_label = Label(win, image=resized_image)
-# logo_label.pack(side='top', anchor='sw')
 wid = 110
 heit = 60
-
 v = StringVar()
 q = StringVar()
 Next = StringVar()
@@ -631,5 +571,5 @@ if not Analysis:
     
     welcome()
 
-select_img() 
+select_img()
 win.mainloop()
